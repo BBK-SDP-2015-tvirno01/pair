@@ -81,9 +81,16 @@ public class Board {
      * Throw an IllegalArgumentException if move's column is full on this Board.
      */
     public void makeMove(Move move) {
-        // TODO
-        //Delete the following code once you've decided to start implementing
-//        throw new UnsupportedOperationException("You need to implement makeMove before running the game.");
+        int firstOccupiedRow = 1;
+        if(this.getTile(0,move.getColumn()) != null){
+            throw new IllegalArgumentException("The column is already full - can't make this move!");
+        } else {
+            while(getTile(firstOccupiedRow,move.getColumn()) == null && firstOccupiedRow < NUM_ROWS - 1){
+                firstOccupiedRow++;
+
+            }
+            board[firstOccupiedRow][move.getColumn()] = move.getPlayer();
+        }
     }
 
     /**
