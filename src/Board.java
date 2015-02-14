@@ -85,11 +85,17 @@ public class Board {
         if(this.getTile(0,move.getColumn()) != null){
             throw new IllegalArgumentException("The column is already full - can't make this move!");
         } else {
-            while(getTile(firstOccupiedRow,move.getColumn()) == null && firstOccupiedRow < NUM_ROWS - 1){
-                firstOccupiedRow++;
-
+            for(int i = 1;i < NUM_ROWS;i++){
+                if(getTile(i,move.getColumn()) != null) {
+                    firstOccupiedRow = i;
+                    break;
+                } else {
+                    if(i == NUM_ROWS - 1){
+                        firstOccupiedRow = NUM_ROWS;
+                    }
+                }
             }
-            board[firstOccupiedRow][move.getColumn()] = move.getPlayer();
+            board[firstOccupiedRow - 1][move.getColumn()] = move.getPlayer();
         }
     }
 
