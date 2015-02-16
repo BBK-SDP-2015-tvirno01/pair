@@ -110,7 +110,7 @@ public class Board {
      * array of length 0.
      */
     public Move[] getPossibleMoves(Player p) {
-        List<Move> possibleMoves = new ArrayList<>();
+        List<Move> possibleMoves = new ArrayList<Move>();
         if(hasConnectFour() == null) {
             for (int i = 0; i < NUM_COLS; i++) {
                 if (getTile(0, i) == null) {
@@ -118,7 +118,9 @@ public class Board {
                 }
             }
         }
-        return (Move[]) possibleMoves.toArray();
+        Move[] m = {};
+
+        return possibleMoves.toArray(m);
     }
 
     /**

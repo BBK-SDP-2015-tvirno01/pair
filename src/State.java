@@ -2,6 +2,8 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An instance represents the state of a game of Connect Four.
@@ -111,11 +113,13 @@ public class State implements Comparable<Object> {
      */
     public void initializeChildren() {
         Move[] possibleMoves = board.getPossibleMoves(getPlayer());
-        List<State> cStates = new ArrayList<>();
+        List<State> cStates = new ArrayList<State>();
         for(Move m : possibleMoves){
             cStates.add(new State(lastMove.getPlayer(),new Board(board,m),m));
         }
-        children = cStates.toArray();
+
+        State[] s = {};
+        children = cStates.toArray(s);
     }
 
     /**

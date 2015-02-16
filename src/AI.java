@@ -44,10 +44,13 @@ public class AI implements Solver {
      * Note: If s has a winner (four in a row), it should be a leaf.
      */
     public static void createGameTree(State s, int d) {
-        // Note: This method must be recursive, recurse on d,
-        // which should get smaller with each recursive call
+        if(d > 1){
+            s.initializeChildren();
+            for(State child : s.getChildren()){
+                createGameTree(child,d-1);
+            }
 
-        // TODO
+        }
     }
 
     /**
