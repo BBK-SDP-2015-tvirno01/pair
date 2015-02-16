@@ -110,8 +110,15 @@ public class Board {
      * array of length 0.
      */
     public Move[] getPossibleMoves(Player p) {
-        // TODO
-        return null;
+        List<Move> possibleMoves = new ArrayList<>();
+        if(hasConnectFour() == null) {
+            for (int i = 0; i < NUM_COLS; i++) {
+                if (getTile(0, i) == null) {
+                    possibleMoves.add(new Move(p, i));
+                }
+            }
+        }
+        return (Move[]) possibleMoves.toArray();
     }
 
     /**
