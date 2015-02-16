@@ -66,7 +66,22 @@ public class AI implements Solver {
      * tree rooted at s, indicating how desirable that java.State is to this player.
      */
     public void minimax(State s) {
-        // TODO
+        if(s.getChildren().length==0){
+            s.setValue(evaluateBoard(s.getBoard()));
+        }else{
+
+            for(State child : s.getChildren()){
+                //concurrency???
+                minimax(child);
+            }
+
+            int value = Integer.MAX_VALUE;
+            for(State vChild : s.getChildren()){
+                value = (value < vChild.getValue() ? value : vChild.getValue());
+            }
+
+            s.setValue(value);
+        }
     }
 
     /**
