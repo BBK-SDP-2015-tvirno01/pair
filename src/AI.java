@@ -65,24 +65,40 @@ public class AI implements Solver {
      * Use the Minimax algorithm to assign a numerical value to each State of the
      * tree rooted at s, indicating how desirable that java.State is to this player.
      */
-    public void minimax(State s) {
-        if(s.getChildren().length==0){
+    public void minimax(State s){
+        Boolean sPlayer = s.getPlayer() == player;
+
+        if(s.getChildren().length == 0) {     //leaf node
             s.setValue(evaluateBoard(s.getBoard()));
-        }else{
-
+        } else {
             for(State child : s.getChildren()){
-                //concurrency???
-                minimax(child);
+                minimax(child);               //stay in same AI instance
             }
-
-            int value = Integer.MAX_VALUE;
-            for(State vChild : s.getChildren()){
-                value = (value < vChild.getValue() ? value : vChild.getValue());
+            if(sPlayer){
+                s.setValue(getMaxValue(s.getChildren()));
+            } else {
+                s.setValue(getMaxValue(s.getChildren()));
             }
-
-            s.setValue(value);
         }
     }
+//    public void minimax(State s) {
+//        if(s.getChildren().length==0){
+//            s.setValue(evaluateBoard(s.getBoard()));
+//        }else{
+//
+//            for(State child : s.getChildren()){
+//                //concurrency???
+//                minimax(child);
+//            }
+//
+//            int value = Integer.MAX_VALUE;
+//            for(State vChild : s.getChildren()){
+//                value = (value < vChild.getValue() ? value : vChild.getValue());
+//            }
+//
+//            s.setValue(value);
+//        }
+//    }
 
     /**
      * Evaluate the desirability of Board b for this player
