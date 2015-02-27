@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,8 +33,21 @@ public class AI implements Solver {
      */
     @Override
     public Move[] getMoves(Board b) {
-        // TODO
-        return null;
+        List<Move> mvList = new ArrayList<>();
+        State sRoot = new State(player,b,null);
+        createGameTree(sRoot,depth);
+        minimax(sRoot);
+
+        for(State s : sRoot.getChildren()){
+            if(s.getValue()==sRoot.getValue()){
+                mvList.add(s.getLastMove());
+            }
+        }
+
+        Move[] result = {};
+
+        return mvList.toArray(result);
+
     }
 
     /**
