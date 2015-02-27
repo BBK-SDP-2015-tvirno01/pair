@@ -14,7 +14,6 @@ public class StateTest {
         for (int i = 0; i < 6; i++) {
             testBoard.makeMove(new Move((i % 2 != 0 ? Player.YELLOW : Player.RED), 0));
         }
-        dupBoard = testBoard;
     }
 
     @Test
