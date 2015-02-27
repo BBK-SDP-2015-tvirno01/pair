@@ -1,5 +1,5 @@
 YELLOW to play
-Value: 3
+Value: 7
 | | | | | | | |
 | | | | | | | |
 | | | | | | | |

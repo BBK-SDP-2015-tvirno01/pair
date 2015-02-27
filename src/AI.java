@@ -24,7 +24,11 @@ public class AI implements Solver {
     }
 
     /**
-     * See Solver.getMoves for the specification.
+     * Return this Solver's preferred Moves. If this Solver prefers one
+     * Move above all others, return an array of length 1. Larger arrays
+     * indicate equally preferred Moves.
+     * An array of size 0 indicates that there are no possible moves.
+     * Precondition: b is not null.
      */
     @Override
     public Move[] getMoves(Board b) {
@@ -77,29 +81,26 @@ public class AI implements Solver {
             if(sPlayer){
                 s.setValue(getMaxValue(s.getChildren()));
             } else {
-                s.setValue(getMaxValue(s.getChildren()));
+                s.setValue(getMinValue(s.getChildren()));
             }
         }
     }
-//    public void minimax(State s) {
-//        if(s.getChildren().length==0){
-//            s.setValue(evaluateBoard(s.getBoard()));
-//        }else{
-//
-//            for(State child : s.getChildren()){
-//                //concurrency???
-//                minimax(child);
-//            }
-//
-//            int value = Integer.MAX_VALUE;
-//            for(State vChild : s.getChildren()){
-//                value = (value < vChild.getValue() ? value : vChild.getValue());
-//            }
-//
-//            s.setValue(value);
-//        }
-//    }
 
+    private int getMaxValue(State[] children){
+        int result = Integer.MIN_VALUE;
+        for(State s: children){
+            result = (s.getValue() > result ? s.getValue(): result);
+        }
+        return result;
+    }
+
+    private int getMinValue(State[] children){
+        int result = Integer.MAX_VALUE;
+        for(State s: children){
+            result = (s.getValue() < result ? s.getValue(): result);
+        }
+        return result;
+    }
     /**
      * Evaluate the desirability of Board b for this player
      * Precondition: b is a leaf node of the game tree (because that is most
