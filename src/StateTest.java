@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 public class StateTest {
     Board testBoard;
     State testState;
-    Board dupBoard;
 
     @org.junit.Before
     public void setUp() throws Exception {
@@ -24,8 +23,8 @@ public class StateTest {
             assert (child.getLastMove().getPlayer() == Player.RED);
             assertEquals(child.getLastMove().getColumn(), count + 1);
             for (int j = 0; j < 6; j++) {
-                assert (child.getBoard().getTile(6 - j, 0) == (j % 2 != 0 ? Player.YELLOW : Player.RED));
-                assertNull (child.getChildren());
+                assert (child.getBoard().getTile(5 - j, 0) == (j % 2 != 0 ? Player.YELLOW : Player.RED));
+                assertEquals (0,child.getChildren().length);
             }
             count++;
         }
